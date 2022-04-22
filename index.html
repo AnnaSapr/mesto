@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 minimum-scale=1.0">
+  <link rel="stylesheet" href="./vendor/normalize.css">
   <link rel="stylesheet" href="./style.css">
   <title>Проект Место</title>
 </head>
@@ -15,9 +16,10 @@
         <img class="profile__avatar" src="./mesto-images/Жак-Ив Кусто.svg">
         <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button" type="button" title="Редактировать профиль"></button>
         <p class="profile__about">Исследователь океана</p>
-        </div>
+      </div>
+        <button class="profile__edit-button" type="button" title="Редактировать профиль"></button>
+        
         <buttom class="profile__add-button" type="button" title="Добавить"></buttom>
       </section>
       <section class="elements">
@@ -71,14 +73,15 @@
 
     <div class="popup">
       <div class="popup__container">
-      <form class="popup__edit-form" novalidate>
+      <form class="popup__edit-form" >
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input" type="text" name="name" placeholder="Жак-Ив Кусто" required>
-        <input class="popup__input" type="text" name="description" placeholder="Исследователь океана" required>
+        <input class="popup__input  popup__input_type_name" type="text" name="name" placeholder="Жак-Ив Кусто" value="Жак-Ив Кусто" required>
+        <input class="popup__input popup__input_type_text" type="text" name="description" placeholder="Исследователь океана"  value="Исследователь океана" required>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
       <button class="popup__close-button" type="button"></button>
       </div>
     </div>
+    <script  src="./scripts/popup.js"></script>
 </body>
 </html>
