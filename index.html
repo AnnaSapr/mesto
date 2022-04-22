@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 minimum-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Проект Место</title>
+</head>
+<body  class="page">
+    <header class="header">
+        <img  class="header__logo" src="./mesto-images/логотип.svg" alt="логотип">
+    </header>
+    <main class="content"> 
+      <section class="profile">
+        <img class="profile__avatar" src="./mesto-images/Жак-Ив Кусто.svg">
+        <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button" type="button" title="Редактировать профиль"></button>
+        <p class="profile__about">Исследователь океана</p>
+        </div>
+        <buttom class="profile__add-button" type="button" title="Добавить"></buttom>
+      </section>
+      <section class="elements">
+        <ul class="element">
+          <img class="element__image" src="./mesto-images/Амальфи.jpg" alt="Амальфи">
+          <div class="element__group">
+            <h3 class="element__text">Амальфи</h3>
+            <button class="element__like-button" type="button" title="Поставить лайк"></button>
+          </div>
+        </ul>
+        <ul class="element">
+          <img class="element__image" src="./mesto-images/Аттика.jpg" alt="Аттика">
+          <div class="element__group">
+            <h3 class="element__text">Аттика</h3>
+            <button class="element__like-button" type="button" title="Поставить лайк"></button>
+          </div>
+          </ul>
+        <ul class="element">
+          <img class="element__image" src="./mesto-images/Балеарские острова.jpg" alt="Балеарские острова">
+          <div class="element__group">
+            <h3 class="element__text">Балеарские острова</h3>
+            <button class="element__like-button" type="button" title="Поставить лайк"></button>
+          </div>
+        </ul>
+        <ul class="element">
+          <img class="element__image" src="./mesto-images/водопад Гленкар.jpg" alt="Водопад">
+          <div class="element__group">
+            <h3 class="element__text">Водопад Гленкар</h3>
+            <button class="element__like-button" type="button" title="Поставить лайк"></button>
+          </div>
+          </ul>
+        <ul class="element">
+          <img class="element__image" src="./mesto-images/Дубай.jpg" alt="Дубай">
+          <div class="element__group">
+            <h3 class="element__text">Дубай</h3>
+            <button class="element__like-button" type="button" title="Поставить лайк"></button>
+          </div>
+          </ul>
+        <ul class="element">
+          <img class="element__image" src="./mesto-images/Сейшельские острова.jpg" alt="Сейшельские острова">
+          <div class="element__group">
+            <h3 class="element__text">Сейшельские острова</h3>
+            <button class="element__like-button" type="button" title="Поставить лайк"></button>
+          </div>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">© 2022 Mesto Russia</p>
+    </footer>
+
+    <div class="popup">
+      <div class="popup__container">
+      <form class="popup__edit-form" novalidate>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__input" type="text" name="name" placeholder="Жак-Ив Кусто" required>
+        <input class="popup__input" type="text" name="description" placeholder="Исследователь океана" required>
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-button" type="button"></button>
+      </div>
+    </div>
+</body>
+</html>
