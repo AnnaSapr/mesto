@@ -54,3 +54,19 @@ let saveButton = popup.querySelector('.popup__save-button');
 // он будет следить за событием “submit” - «отправка»
 saveButton.addEventListener ('click',formSubmitHandler)
 formElement.addEventListener('submit', formSubmitHandler);
+
+
+
+const LikeElements = document.querySelector('.element')
+const LikeButton = LikeElements.querySelector('.element__like-button');
+LikeButton.addEventListener('click',function(event) {
+    if (event.target == event.currentTarget){
+    addLikes();
+    }
+});
+   
+    function addLikes(){
+        
+ LikeButton.classList.toggle('element__like-button_active');
+    }
+    
