@@ -57,16 +57,18 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 
 
-const LikeElements = document.querySelector('.element')
-const LikeButton = LikeElements.querySelector('.element__like-button');
-LikeButton.addEventListener('click',function(event) {
-    if (event.target == event.currentTarget){
-    addLikes();
-    }
-});
-   
-    function addLikes(){
-        
- LikeButton.classList.toggle('element__like-button_active');
-    }
+const LikeElements = document.querySelectorAll('.element')
+
+LikeElements.forEach((EachElement)=>{
+const LikeButton = EachElement.querySelector('.element__like-button');
+    LikeButton.addEventListener('click',function(event) {
+        if (event.target == event.currentTarget){
+        addLikes();
+        }
+    });
     
+        function addLikes(){
+            
+    LikeButton.classList.toggle('element__like-button_active');
+        }
+})
