@@ -1,0 +1,29 @@
+.elements{
+  
+    min-width: 880px;
+    margin-top: 46px;
+    row-gap: 20px;
+    column-gap: 17px;
+    grid-template-columns: repeat(3,282px);
+    grid-template-rows: repeat(2,361px);
+    display: grid;   
+
+  }
+  @media screen and (max-width:1024px) {
+    .elements{
+min-width: 282px;
+grid-template-columns: repeat(2,282px);
+grid-template-rows: repeat(3,361px);
+justify-content: center;
+margin-top: 36px;
+    }
+    
+  }
+  @media screen and (max-width:568px) {
+    .elements{
+min-width: 282px;
+grid-template-columns: 282px;
+grid-template-rows: repeat(6,361px);
+    }
+    
+  }

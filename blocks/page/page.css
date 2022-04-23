@@ -1,0 +1,25 @@
+.page{
+    background-color: black;
+    font-family: "Inter",Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    margin:45px 200px 0;
+
+}
+
+@media screen and (max-width: 1140px) {
+  .page {
+    margin: 45px 100px 0;
+   
+  } 
+}
+@media screen  and (max-width:568px) {
+    .page{
+      min-width: 320px;
+      max-width: 768px;
+      margin-top: 28px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }

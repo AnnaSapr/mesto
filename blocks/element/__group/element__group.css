@@ -1,0 +1,10 @@
+  
+  .element__group{
+    display: flex;
+    margin-left: 21px;
+    margin-right: 15px;
+    margin-top: 25px;
+    justify-content: space-between;
+    align-items: center; 
+max-width: 296px;
+  }
