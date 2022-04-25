@@ -2,7 +2,3 @@
     background-image: url(../../../../mesto-images/like_active.svg);
    
   }
-  .element__like-button_active:hover{
-    opacity: 1;
-   
-  }

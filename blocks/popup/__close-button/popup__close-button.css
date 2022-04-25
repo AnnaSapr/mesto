@@ -4,12 +4,12 @@
     background-position: center center;
     object-fit: cover;
     background-color: inherit;
-  border: none;
-  width: 32px;
-  height: 32px;
-  position: absolute;
-  top:-40px;
-  right:-40px;
+    border: none;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top:-40px;
+    right:-40px;
   
   }
   

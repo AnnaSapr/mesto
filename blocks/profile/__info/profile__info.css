@@ -10,15 +10,14 @@
   }
   @media screen and (max-width: 1024px) {
     .profile__info {
-   justify-content: center;
+     justify-content: center;
      
     } 
   }
   @media screen and (max-width:568px) {
     .profile__info{
-   max-width: 282px;
-   
-     
+     max-width: 282px;
+  
     }
     
   }
