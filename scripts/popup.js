@@ -83,6 +83,11 @@ formElement.addEventListener('submit', formSubmitHandler);
 const cardTemplate = document.querySelector('#card-template').content;
 const cards = document.querySelector('.elements');
 
+const closeViewPopup = () => {
+  popupView.classList.remove('popup_opened');
+}
+
+
 const handleDeleteClick = (evt) => {
   evt.target.closest('.element').remove();
 };
@@ -103,9 +108,6 @@ const handleImageClick = (evt) => {
   openViewPopup(alt, src);
 }
 
-const closeViewPopup = () => {
-  popupView.classList.remove('popup_opened');
-}
 
 closeView.addEventListener('click', closeViewPopup)
 
@@ -161,6 +163,10 @@ const initialCards = [
   const image = card.querySelector('.element__image');
   image.src = cardLink.value;
   image.alt = `Фото ${cardName.value}.`;
+  const DeleteBtn = card.querySelector('.element__trash-button');
+  const LikeButton = card.querySelector('.element__like-button');
+  LikeButton.addEventListener('click', handleLikeClick);
+  DeleteBtn.addEventListener('click', handleDeleteClick);
   cards.prepend(card);
   togglePopupAdd();
 
