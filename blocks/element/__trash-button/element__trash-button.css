@@ -1,0 +1,19 @@
+.element__trash-button{
+    background-image: url(../../../mesto-images/Trash.svg);
+    background-repeat: no-repeat;
+    background-position: center ;
+    width: 18px;
+    height: 19px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    transition: 0.3s;
+}
+
+.element__trash-button:hover{
+    opacity: 0.6;
+    cursor: pointer;
+    transform: scale(1.1);
+}
