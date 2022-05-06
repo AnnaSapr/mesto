@@ -10,6 +10,12 @@ const popupAdd = document.querySelector('.popup_type_add')
 const popupOpenAdd = document.querySelector('.profile__add-button')
 const CloseAdd = popupAdd.querySelector('.popup__close-button')
 let addElement = popupAdd.querySelector('.popup__add-form')
+const cardName = popupAdd.querySelector('.popup__input_type_desription')
+const cardLink  = popupAdd.querySelector('.popup__input_type_link')
+const popupView = document.querySelector('.popup_type_view');
+const imageView = popupView.querySelector('.popup__image');
+const captionView =  popupView.querySelector('.popup__description');
+const closeView = popupView.querySelector('.popup__close-button');
 
 
 CloseAdd.addEventListener('click', function( ){
@@ -29,8 +35,11 @@ popupOpenAdd.addEventListener('click', function( event ){
  });
 
  function togglePopupAdd(){
+  cardName.value = '';
+  cardLink.value = '';
   popupAdd.classList.toggle('popup_opened');
  }
+ 
 
  /// Воспользуйтесь инструментом .querySelector()
 
@@ -71,12 +80,34 @@ function formSubmitHandler (evt) {
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
-
-
-
-
 const cardTemplate = document.querySelector('#card-template').content;
 const cards = document.querySelector('.elements');
+
+const handleDeleteClick = (evt) => {
+  evt.target.closest('.element').remove();
+};
+const handleLikeClick = (evt) => {
+  evt.target.classList.toggle('element__like-button_active');
+};
+
+const openViewPopup = (name, link) => {
+  imageView.src = link;
+  imageView.alt = name;
+  captionView.textContent = name;
+  popupView.classList.add('popup_opened');
+}
+
+
+const handleImageClick = (evt) => {
+  const {alt, src} = evt.target;
+  openViewPopup(alt, src);
+}
+
+const closeViewPopup = () => {
+  popupView.classList.remove('popup_opened');
+}
+
+closeView.addEventListener('click', closeViewPopup)
 
 const initialCards = [
   {
@@ -111,12 +142,17 @@ const initialCards = [
   const image = card.querySelector('.element__image');
   image.src = icon.link;
   image.alt = `Фото ${icon.name}.`;
+  const DeleteBtn = card.querySelector('.element__trash-button');
+  const LikeButton = card.querySelector('.element__like-button');
+  LikeButton.addEventListener('click', handleLikeClick);
+  DeleteBtn.addEventListener('click', handleDeleteClick);
+  image.addEventListener('click', handleImageClick);
   cards.append(card);
+
   });
 
-  
- let cardName = popupAdd.querySelector('.popup__input_type_desription')
- let cardLink  = popupAdd.querySelector('.popup__input_type_link')
+ 
+ 
 
  function formSubmitAdd (evt) {
   evt.preventDefault(); 
@@ -132,26 +168,7 @@ const initialCards = [
 
 addElement.addEventListener('submit',formSubmitAdd)
 
-const openImage = document.querySelector('.popup_type_view')
-let img = openImage.querySelector('.popup__image')
-let text = openImage.querySelector('.popup__description')
-let about = cards.querySelector('.element__text')
-let photo = cards.querySelector('.element__image')
 
-
-cards.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('element__like-button') ) {
-    evt.target.classList.toggle('element__like-button_active');
-  } else if (evt.target.classList.contains('element__image')) {
-    evt.target.classList.toggle('popup_opened');
-    photo.src = img.value;
-  about.textContent = text.value
-  } else if (evt.target.classList.contains('element__trash-button')) {
- const card = evt.target.closest('.element');
- card.remove()
-  }
-  
-});
 
 
 
