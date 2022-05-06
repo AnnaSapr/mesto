@@ -167,6 +167,7 @@ const initialCards = [
   const LikeButton = card.querySelector('.element__like-button');
   LikeButton.addEventListener('click', handleLikeClick);
   DeleteBtn.addEventListener('click', handleDeleteClick);
+  image.addEventListener('click', handleImageClick);
   cards.prepend(card);
   togglePopupAdd();
 
