@@ -10,7 +10,7 @@
     max-width: 358px;
     min-height: 50px;
     border-radius: 2px;
-   
+    transition: opacity 0.2s linear;
   }
   .popup__save-button:hover{
     opacity: 0.8;

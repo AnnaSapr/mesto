@@ -1,17 +1,17 @@
 const popupOpenButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup_type_edit');
 const popupCloseButton = popup.querySelector('.popup__close-button');
-let formElement = popup.querySelector('.popup__edit-form')// Воспользйтесь методом querySelector()
-let nameInput =  popup.querySelector('.popup__input_type_name')// Воспользуйтесь инструментом .querySelector()
-let jobInput = popup.querySelector('.popup__input_type_text')
-let firstname = document.querySelector('.profile__name')
-let profession = document.querySelector('.profile__about')
-const popupAdd = document.querySelector('.popup_type_add') 
-const popupOpenAdd = document.querySelector('.profile__add-button')
-const CloseAdd = popupAdd.querySelector('.popup__close-button')
-let addElement = popupAdd.querySelector('.popup__add-form')
-const cardName = popupAdd.querySelector('.popup__input_type_desription')
-const cardLink  = popupAdd.querySelector('.popup__input_type_link')
+let formElement = popup.querySelector('.popup__edit-form');// Воспользйтесь методом querySelector()
+let nameInput =  popup.querySelector('.popup__input_type_name');// Воспользуйтесь инструментом .querySelector()
+let jobInput = popup.querySelector('.popup__input_type_text');
+let firstname = document.querySelector('.profile__name');
+let profession = document.querySelector('.profile__about');
+const popupAdd = document.querySelector('.popup_type_add'); 
+const popupOpenAdd = document.querySelector('.profile__add-button');
+const CloseAdd = popupAdd.querySelector('.popup__close-button');
+let addElement = popupAdd.querySelector('.popup__add-form');
+const cardName = popupAdd.querySelector('.popup__input_type_desription');
+const cardLink  = popupAdd.querySelector('.popup__input_type_link');
 const popupView = document.querySelector('.popup_type_view');
 const imageView = popupView.querySelector('.popup__image');
 const captionView =  popupView.querySelector('.popup__description');
@@ -109,7 +109,7 @@ const handleImageClick = (evt) => {
 }
 
 
-closeView.addEventListener('click', closeViewPopup)
+closeView.addEventListener('click', closeViewPopup);
 
 const initialCards = [
   {
@@ -173,7 +173,7 @@ const initialCards = [
 
 }
 
-addElement.addEventListener('submit',formSubmitAdd)
+addElement.addEventListener('submit',formSubmitAdd);
 
 
 

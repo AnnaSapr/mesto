@@ -9,7 +9,7 @@
     margin-left: auto;
     align-self: center;
     background-color: inherit;
-   
+    transition: opacity 0.2s linear;
     
   }
   .profile__add-button:hover{
