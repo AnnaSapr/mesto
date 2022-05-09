@@ -1,15 +1,15 @@
 const popupOpenButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup_type_edit');
-const popupCloseButton = popup.querySelector('.popup__close-button');
-let formElement = popup.querySelector('.popup__edit-form');// Воспользйтесь методом querySelector()
-let nameInput =  popup.querySelector('.popup__input_type_name');// Воспользуйтесь инструментом .querySelector()
-let jobInput = popup.querySelector('.popup__input_type_text');
-let firstname = document.querySelector('.profile__name');
-let profession = document.querySelector('.profile__about');
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupCloseEdit = popupEdit.querySelector('.popup__close-button');
+const formElement = popupEdit.querySelector('.popup__edit-form');// Воспользйтесь методом querySelector()
+const nameInput =  popupEdit.querySelector('.popup__input_type_name');// Воспользуйтесь инструментом .querySelector()
+const jobInput = popupEdit.querySelector('.popup__input_type_text');
+const firstname = document.querySelector('.profile__name');
+const profession = document.querySelector('.profile__about');
 const popupAdd = document.querySelector('.popup_type_add'); 
 const popupOpenAdd = document.querySelector('.profile__add-button');
-const CloseAdd = popupAdd.querySelector('.popup__close-button');
-let addElement = popupAdd.querySelector('.popup__add-form');
+const closeAdd = popupAdd.querySelector('.popup__close-button');
+const addElement = popupAdd.querySelector('.popup__add-form');
 const cardName = popupAdd.querySelector('.popup__input_type_desription');
 const cardLink  = popupAdd.querySelector('.popup__input_type_link');
 const popupView = document.querySelector('.popup_type_view');
@@ -17,74 +17,76 @@ const imageView = popupView.querySelector('.popup__image');
 const captionView =  popupView.querySelector('.popup__description');
 const closeView = popupView.querySelector('.popup__close-button');
 
+function openPopup (popup) {
+  popup.classList.add('popup_opened')
+}
 
-CloseAdd.addEventListener('click', function( ){
-  togglePopupAdd();  
+function closePopup (popup){
+  popup.classList.remove('popup_opened')
+}
+
+//Открытие формы добавления
+closeAdd.addEventListener('click', function( ){
+  closePopup(popupAdd);  
  });
 
 
 popupAdd.addEventListener('click', function( event ){
  if (event.target == event.currentTarget) {
- togglePopupAdd(); 
+  closePopup(popupAdd);   
  } 
 });
 
 popupOpenAdd.addEventListener('click', function( event ){
  event.preventDefault();
-  togglePopupAdd();
+ openPopup(popupAdd);
  });
 
  function togglePopupAdd(){
-  cardName.value = '';
-  cardLink.value = '';
-  popupAdd.classList.toggle('popup_opened');
+  addElement.reset();
+  closePopup(popupAdd);
  }
  
 
- /// Воспользуйтесь инструментом .querySelector()
-
+ //  Открытие формы редактирования
 
 popupOpenButton.addEventListener('click', function( event ){
 event.preventDefault();
 nameInput.value  =  firstname.textContent;
 jobInput.value  =  profession.textContent;
- togglePopup();
+ openPopup(popupEdit)
 });
 
-popupCloseButton.addEventListener('click', function( event ){
- togglePopup();  
+popupCloseEdit.addEventListener('click', function( event ){
+  closePopup(popupEdit);  
  });
 
-popup.addEventListener('click', function( event ){
+popupEdit.addEventListener('click', function( event ){
   if (event.target == event.currentTarget) {
-  togglePopup(); 
+  closePopup(popupEdit); 
   } 
 });   
 
-function togglePopup(){
-  popup.classList.toggle('popup_opened');
-}
+
 // Находим форму в DOM
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-// Получите значение полей jobInput и nameInput из свойства value// Выберите элементы, куда должны быть вставлены значения полей 
+function formSubmitHandlerEdit (evt) {
+    evt.preventDefault();                                              
     firstname.textContent = nameInput.value;
-    profession.textContent = jobInput.value;// Вставьте новые значения с помощью textContent
-    togglePopup();
+    profession.textContent = jobInput.value;
+    closePopup(popupEdit);
    
 }
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandlerEdit);
 
 const cardTemplate = document.querySelector('#card-template').content;
 const cards = document.querySelector('.elements');
 
 const closeViewPopup = () => {
-  popupView.classList.remove('popup_opened');
+ closePopup(popupView)
 }
 
 
@@ -95,11 +97,16 @@ const handleLikeClick = (evt) => {
   evt.target.classList.toggle('element__like-button_active');
 };
 
-const openViewPopup = (name, link) => {
+function initialPopupView (name, link) {
   imageView.src = link;
   imageView.alt = name;
   captionView.textContent = name;
-  popupView.classList.add('popup_opened');
+  
+}
+
+const openViewPopup = (name, link) => {
+  initialPopupView(name, link)
+  openPopup(popupView);
 }
 
 
@@ -138,19 +145,33 @@ const initialCards = [
   }
   ];
  
-  initialCards.forEach((icon) => {
-  const card = cardTemplate.querySelector('.element').cloneNode(true);
-  card.querySelector('.element__text').textContent = icon.name;
-  const image = card.querySelector('.element__image');
-  image.src = icon.link;
-  image.alt = `Фото ${icon.name}.`;
-  const DeleteBtn = card.querySelector('.element__trash-button');
-  const LikeButton = card.querySelector('.element__like-button');
-  LikeButton.addEventListener('click', handleLikeClick);
-  DeleteBtn.addEventListener('click', handleDeleteClick);
-  image.addEventListener('click', handleImageClick);
-  cards.append(card);
+  function renderCard (cards, card, prepend) {
+    if(prepend) {
+      cards.prepend(card);
+    } else{
+      cards.append(card);
+    }
+  }
 
+  function createCards (name,link) {
+    const card = cardTemplate.querySelector('.element').cloneNode(true);
+    card.querySelector('.element__text').textContent = name;
+    const image = card.querySelector('.element__image');
+    image.src = link;
+    image.alt = `Фото ${name}.`;
+    const deleteBtn = card.querySelector('.element__trash-button');
+    const likeButton = card.querySelector('.element__like-button');
+    likeButton.addEventListener('click', handleLikeClick);
+    deleteBtn.addEventListener('click', handleDeleteClick);
+    image.addEventListener('click', handleImageClick);
+    return card;
+  }
+
+  initialCards.forEach((icon) => {
+  const name = icon.name
+  const link = icon.link
+  const card = createCards(name, link)
+  renderCard(cards, card, false)
   });
 
  
@@ -158,17 +179,10 @@ const initialCards = [
 
  function formSubmitAdd (evt) {
   evt.preventDefault(); 
-  const card = cardTemplate.querySelector('.element').cloneNode(true);
-  card.querySelector('.element__text').textContent = cardName.value;
-  const image = card.querySelector('.element__image');
-  image.src = cardLink.value;
-  image.alt = `Фото ${cardName.value}.`;
-  const DeleteBtn = card.querySelector('.element__trash-button');
-  const LikeButton = card.querySelector('.element__like-button');
-  LikeButton.addEventListener('click', handleLikeClick);
-  DeleteBtn.addEventListener('click', handleDeleteClick);
-  image.addEventListener('click', handleImageClick);
-  cards.prepend(card);
+  const src = cardLink.value;
+  const alt = cardName.value;
+  const card = createCards(alt, src);
+  renderCard(cards, card, true);
   togglePopupAdd();
 
 }
