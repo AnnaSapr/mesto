@@ -1,4 +1,4 @@
-const popupOpenButton = document.querySelector('.profile__edit-button');
+const popupOpenEdit = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupCloseEdit = popupEdit.querySelector('.popup__close-button');
 const formElement = popupEdit.querySelector('.popup__edit-form');// Воспользйтесь методом querySelector()
@@ -38,20 +38,13 @@ popupAdd.addEventListener('click', function( event ){
 });
 
 popupOpenAdd.addEventListener('click', function( event ){
- event.preventDefault();
  openPopup(popupAdd);
  });
-
- function togglePopupAdd(){
-  addElement.reset();
-  closePopup(popupAdd);
- }
  
 
  //  Открытие формы редактирования
 
-popupOpenButton.addEventListener('click', function( event ){
-event.preventDefault();
+popupOpenEdit.addEventListener('click', function( event ){
 nameInput.value  =  firstname.textContent;
 jobInput.value  =  profession.textContent;
  openPopup(popupEdit)
@@ -83,7 +76,7 @@ function formSubmitHandlerEdit (evt) {
 formElement.addEventListener('submit', formSubmitHandlerEdit);
 
 const cardTemplate = document.querySelector('#card-template').content;
-const cards = document.querySelector('.elements');
+const cardsList = document.querySelector('.elements');
 
 const closeViewPopup = () => {
  closePopup(popupView)
@@ -116,7 +109,7 @@ const handleImageClick = (evt) => {
 }
 
 
-closeView.addEventListener('click', closeViewPopup);
+closeView.addEventListener('click', () => closePopup(popupView));
 
 const initialCards = [
   {
@@ -171,7 +164,7 @@ const initialCards = [
   const name = icon.name
   const link = icon.link
   const card = createCards(name, link)
-  renderCard(cards, card, false)
+  renderCard(cardsList, card, false)
   });
 
  
@@ -182,8 +175,9 @@ const initialCards = [
   const src = cardLink.value;
   const alt = cardName.value;
   const card = createCards(alt, src);
-  renderCard(cards, card, true);
-  togglePopupAdd();
+  renderCard(cardsList, card, true);
+  addElement.reset();
+  closePopup(popupAdd);
 
 }
 
