@@ -17,13 +17,20 @@ const imageView = popupView.querySelector('.popup__image');
 const captionView =  popupView.querySelector('.popup__description');
 const closeView = popupView.querySelector('.popup__close-button');
 
+
+
 function openPopup (popup) {
-  popup.classList.add('popup_opened')
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleCloseEsc);
 }
 
-function closePopup (popup){
-  popup.classList.remove('popup_opened')
+function closePopup(popup){
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleCloseEsc);
+
 }
+
+
 
 //Открытие формы добавления
 closeAdd.addEventListener('click', function( ){
@@ -78,9 +85,9 @@ formElement.addEventListener('submit', formSubmitHandlerEdit);
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.elements');
 
-const closeViewPopup = () => {
- closePopup(popupView)
-}
+
+
+closeView.addEventListener('click', () => closePopup(popupView));
 
 
 const handleDeleteClick = (evt) => {
@@ -108,8 +115,20 @@ const handleImageClick = (evt) => {
   openViewPopup(alt, src);
 }
 
+// Следующая проектная
+popupView.addEventListener('click', function (event) {
+  if (event.target == event.currentTarget) {
+    closePopup(popupView);
+    } 
+  });
+ 
+  const handleCloseEsc = (evt) =>{
+    if(evt.key === 'Escape'){
+     const obj = document.querySelector('.popup_opened')
+     closePopup(obj)
+    }
+  }
 
-closeView.addEventListener('click', () => closePopup(popupView));
 
 const initialCards = [
   {
@@ -182,6 +201,8 @@ const initialCards = [
 }
 
 addElement.addEventListener('submit',formSubmitAdd);
+
+
 
 
 

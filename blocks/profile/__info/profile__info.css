@@ -2,15 +2,16 @@
     max-width: 520px;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
     align-content: center;
-    align-items: center;
     
 
 
   }
   @media screen and (max-width: 1024px) {
     .profile__info {
-     justify-content: center;
+    align-items: center;
      
     } 
   }

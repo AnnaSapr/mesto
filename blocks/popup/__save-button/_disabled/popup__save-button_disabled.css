@@ -1,0 +1,11 @@
+.popup__save-button_disabled{
+    background: white;
+    border: 1px solid #000000;
+    color:  #000000;
+    min-height: 50px;
+    opacity: 0.2;
+    border-radius: 2px;
+    font-size: 18px;
+    line-height: 22px;
+    pointer-events: none;
+}
