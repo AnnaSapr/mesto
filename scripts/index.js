@@ -17,39 +17,28 @@ const imageView = popupView.querySelector('.popup__image');
 const captionView =  popupView.querySelector('.popup__description');
 const closeView = popupView.querySelector('.popup__close-button');
 const saveButton = popupAdd.querySelector('.popup__save-button')
-const initialCards = [
-  {
-  name: 'Индонезия',
-  link: 'https://images.unsplash.com/photo-1610036615605-636de68a306e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-  },
-  {
-  name: 'Вайоминг',
-  link: 'https://images.unsplash.com/photo-1594376425830-449d2b7572d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-  },
-  {
-  name: 'Коста-Рика',
-  link: 'https://images.unsplash.com/photo-1643400813506-8f2a366737f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80'
-  },
-  {
-  name: 'Аберфойл',
-  link: 'https://images.unsplash.com/photo-1638627783968-42621c4f28cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-  },
-  {
-  name: 'Аберфойл',
-  link: 'https://images.unsplash.com/photo-1638627783803-e67903259f2a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=986&q=80'
-  },
-  {
-  name: 'Португалия',
-  link: 'https://images.unsplash.com/photo-1575373350254-9ab842370a47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80'
-  }
-  ];
+const cardsList = document.querySelector('.elements');
 
+import {config, initialCards } from "./constants.js";
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+
+const formValidators = {};
+
+// Валидация
+Array.from(document.forms).forEach((formElement) => {
+formValidators[formElement.name] = new FormValidator(config, formElement)
+formValidators[formElement.name].enableValidation()
+});
+
+// Универсальная функция открытия форм
 function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleCloseEsc);
   popup.addEventListener('click', handleCloseOverlay);
 }
 
+//Универсальная функция закрытия форм
 function closePopup(popup){
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleCloseEsc);
@@ -59,7 +48,7 @@ function closePopup(popup){
 
 
 
-//Открытие формы добавления
+//закрытие формы добавления
 closeAdd.addEventListener('click', function( ){
   closePopup(popupAdd);  
  });
@@ -67,7 +56,9 @@ closeAdd.addEventListener('click', function( ){
 
 
 
+ //  Открытие формы добавления
 popupOpenAdd.addEventListener('click', function( event ){
+  formValidators[addElement.name].cleanForm()
  openPopup(popupAdd);
  });
  
@@ -77,24 +68,34 @@ popupOpenAdd.addEventListener('click', function( event ){
 popupOpenEdit.addEventListener('click', function( event ){
 nameInput.value  =  firstname.textContent;
 jobInput.value  =  profession.textContent;
+formValidators[formProfileElement.name].cleanForm()
  openPopup(popupEdit)
 });
 
+//закрытие формы редактирования
 popupCloseEdit.addEventListener('click', function( event ){
   closePopup(popupEdit);  
  });
 
 
-
+//закрытие форм по оверлею
 const handleCloseOverlay = (evt) => {
   if (evt.target == evt.currentTarget) {
     const obj = document.querySelector('.popup_opened')
     closePopup(obj)
   }
 };
-// Находим форму в DOM
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+
+// Закрытие форм по ESC
+ 
+const handleCloseEsc = (evt) =>{
+  if(evt.key === 'Escape'){
+   const obj = document.querySelector('.popup_opened')
+   closePopup(obj)
+  }
+}
+
+
 function formSubmitHandlerEdit (evt) {
     evt.preventDefault();                                              
     firstname.textContent = nameInput.value;
@@ -102,24 +103,13 @@ function formSubmitHandlerEdit (evt) {
     closePopup(popupEdit);
    
 }
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+
 formProfileElement.addEventListener('submit', formSubmitHandlerEdit);
-
-const cardTemplate = document.querySelector('#card-template').content;
-const cardsList = document.querySelector('.elements');
-
 
 
 closeView.addEventListener('click', () => closePopup(popupView));
 
 
-const handleDeleteClick = (evt) => {
-  evt.target.closest('.element').remove();
-};
-const handleLikeClick = (evt) => {
-  evt.target.classList.toggle('element__like-button_active');
-};
 
 function initialPopupView (name, link) {
   imageView.src = link;
@@ -139,15 +129,6 @@ const handleImageClick = (evt) => {
   openViewPopup(alt, src);
 }
 
-// Следующая проектная
- 
-  const handleCloseEsc = (evt) =>{
-    if(evt.key === 'Escape'){
-     const obj = document.querySelector('.popup_opened')
-     closePopup(obj)
-    }
-  }
-
 
 
  
@@ -159,36 +140,23 @@ const handleImageClick = (evt) => {
     }
   }
 
-  function createCards (name,link) {
-    const card = cardTemplate.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__text').textContent = name;
-    const image = card.querySelector('.element__image');
-    image.src = link;
-    image.alt = `Фото ${name}.`;
-    const deleteBtn = card.querySelector('.element__trash-button');
-    const likeButton = card.querySelector('.element__like-button');
-    likeButton.addEventListener('click', handleLikeClick);
-    deleteBtn.addEventListener('click', handleDeleteClick);
-    image.addEventListener('click', handleImageClick);
-    return card;
-  }
 
-  initialCards.forEach((icon) => {
-  const name = icon.name
-  const link = icon.link
-  const card = createCards(name, link)
-  renderCard(cardsList, card, false)
-  });
+  initialCards.forEach((item) => {
+    const card = new Card(item.name, item.link, '#card-template', handleImageClick);
+    const cardElement = card.generateCard();
+    renderCard(cardsList, cardElement, false)
 
- 
- 
+  
+});
 
+//создаем новые карточки
  function formSubmitAdd (evt) {
   evt.preventDefault(); 
   const src = cardLink.value;
   const alt = cardName.value;
-  const card = createCards(alt, src);
-  renderCard(cardsList, card, true);
+  const card = new Card(src, alt, '#card-template', handleImageClick);
+  const cardElement = card.generateCard();
+  renderCard(cardsList, cardElement, true)
   addElement.reset();
   saveButton.classList.add('popup__save-button_disabled');
   saveButton.disabled = true;
@@ -197,8 +165,6 @@ const handleImageClick = (evt) => {
 }
 
 addElement.addEventListener('submit',formSubmitAdd);
-
-
 
 
 
