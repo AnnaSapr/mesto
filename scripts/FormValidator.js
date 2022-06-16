@@ -37,14 +37,14 @@ class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
+  _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _toggleButtonState(inputList, saveButton) {
-    if (this._hasInvalidInput(inputList)) {
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
       // сделай кнопку неактивной
       this._saveButton.classList.add(this._inactiveButtonClass);
       this._saveButton.disabled = true;
@@ -57,13 +57,13 @@ class FormValidator {
   enableValidation() {
     // чтобы проверить состояние кнопки в самом начале
 
-    this._toggleButtonState(this._inputList, this._saveButton);
+    this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         // чтобы проверять его при изменении любого из полей
-        this._toggleButtonState(this._inputList, this._saveButton);
+        this._toggleButtonState();
       });
     });
   }
@@ -73,7 +73,7 @@ class FormValidator {
       this._hideInputError(inputElement);
     });
 
-    this._toggleButtonState(this._inputList, this._saveButton);
+    this._toggleButtonState();
   };
 }
 
