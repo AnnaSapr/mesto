@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 minimum-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Проект Место</title>
 </head>
 <body  class="page">
     <header class="header">
-        <img  class="header__logo" src="./mesto-images/логотип.svg" alt="логотип">
+        <img  class="header__logo" src="<%=require('./mesto-images/логотип.svg')%>" alt="логотип">
     </header>
     <main class="content"> 
       <section class="profile">
-        <img class="profile__avatar" src="./mesto-images/Жак-ИвКусто.svg" alt="Жак-Ив Кусто">
+        <img class="profile__avatar" src="<%=require('./mesto-images/Жак-ИвКусто.svg')%>" alt="Жак-Ив Кусто">
         <div class="profile__info">
           <div class="profile__block">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 id="profile__name" class="profile__name">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button" title="Редактировать профиль"></button>
         </div>
-        <p class="profile__about">Исследователь океана</p>
+        <p id="profile__job"  class="profile__about">Исследователь океана</p>
         </div>
      
         <button class="profile__add-button" type="button" title="Добавить"></button>
@@ -84,7 +83,6 @@
        </li>
       </ul> 
     </template>
-    <script type="module" src="./scripts/index.js"></script>
-   
+
 </body>
 </html>
