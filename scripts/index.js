@@ -3,16 +3,13 @@ import {
   config,
   initialCards,
   popupOpenEdit,
-  popupEdit,
   formProfileElement,
   nameInput,
   jobInput,
   firstname,
   profession,
-  popupAdd,
   popupOpenAdd,
   addElement,
-  popupView,
 } from "./constants.js";
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
@@ -34,32 +31,31 @@ const userInfo = new UserInfo({
   profileName: firstname,
   profileJob: profession,
 });
-const PopupEdit = new PopupWithForm(popupEdit, {
+const popupEditInfo = new PopupWithForm(".popup_type_edit", {
   formCallback: (data) => {
     userInfo.setUserInfo(data);
 
-    PopupEdit.close();
+    popupEditInfo.close();
   },
 });
-PopupEdit.setEventListeners();
+popupEditInfo.setEventListeners();
 
-const PopupAdd = new PopupWithForm(popupAdd, {
+const popupAddCard = new PopupWithForm(".popup_type_add", {
   formCallback: (data) => {
     const item = {
       name: data.description,
       link: data.url,
     };
     section.addItem(createCard(item));
-    addElement.reset();
-    PopupAdd.close();
+    popupAddCard.close();
   },
 });
-PopupAdd.setEventListeners();
+popupAddCard.setEventListeners();
 
 //  Открытие формы добавления
 popupOpenAdd.addEventListener("click", function () {
   formValidators[addElement.name].cleanForm();
-  PopupAdd.open();
+  popupAddCard.open();
 });
 
 //  Открытие формы редактирования
@@ -70,17 +66,16 @@ popupOpenEdit.addEventListener("click", function () {
   jobInput.value = data.job;
   formValidators[formProfileElement.name].cleanForm();
 
-  PopupEdit.open();
+  popupEditInfo.open();
 });
 
-const popupWithImage = new PopupWithImage(popupView);
+const popupWithImage = new PopupWithImage(".popup_type_view");
 popupWithImage.setEventListeners();
 
-const handleCardClick = (evt) => {
+const handleCardClick = (name,link) => {
   const data = {
-    image: evt.target.src,
-    text: evt.target.closest(".element").querySelector(".element__text")
-      .textContent,
+    image: link,
+    text: name
   };
   popupWithImage.open(data);
 };
