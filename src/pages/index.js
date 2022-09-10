@@ -1,4 +1,4 @@
-import "../pages/index.css";
+import "./index.css";
 import {
   config,
   initialCards,
@@ -10,13 +10,13 @@ import {
   profession,
   popupOpenAdd,
   addElement,
-} from "./constants.js";
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
-import Section from "./Section.js";
-import UserInfo from "./UserInfo.js";
+} from "../components/constants.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 import { data } from "autoprefixer";
 
 const formValidators = {};
