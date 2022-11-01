@@ -1,10 +1,17 @@
 
 export default class Card {
-  constructor(name, link, cardSelector,handleCardClick) {
+  constructor(name, link,likes, id, userId, ownerId,cardSelector, handleCardClick, handleDeleteCard, handleSetLike) {
     this._name = name;
     this._link = link;
+    this._likes = likes;
+    this._id = id;
+    this._userId = userId;
+    this._ownerId = ownerId;
     this._cardSelector = cardSelector;
-    this._handleCardClick = handleCardClick
+    this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleSetLike = handleSetLike;
+    this.popup = document.querySelector('.popup_type_confirm')
   }
 
   _getTemplate() {
@@ -18,9 +25,25 @@ export default class Card {
     this._cardElement.remove();
     this._cardElement = null;
   }
+ isLiked(){
+  const cardIsLiked = this._likes.find(user => user._id === this._userId)
+ 
+  return cardIsLiked
+ }
 
-  _handleLikeClick() {
-    this._likeButton.classList.toggle("element__like-button_active");
+
+
+  setLike(newLikes){
+    this._likes = newLikes
+    const likeCountElement = this._cardElement.querySelector('.element__like-count');
+    likeCountElement.textContent = this._likes.length;
+
+    if(this.isLiked()){
+      this._likeButton.classList.add("element__like-button_active");
+    }
+    else {
+      this._likeButton.classList.remove("element__like-button_active");
+    }
   }
 
   generateCard() {
@@ -32,15 +55,19 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = `Фото ${this._name}.`;
     this._setEventListeners();
+    this.setLike(this._likes)
+    if (this._ownerId !== this._userId) {
+      this._deleteBtn.style.display = 'none'
+    };
     return this._cardElement;
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", (evt) => {
-      this._handleLikeClick(evt);
+      this._handleSetLike(this._id);
     });
-    this._deleteBtn.addEventListener("click", (evt) => {
-      this._handleDeleteClick(evt);
+    this._deleteBtn.addEventListener("click", () => {
+      this._handleDeleteCard(this._id);
     });
     this._image.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
