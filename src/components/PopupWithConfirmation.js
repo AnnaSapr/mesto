@@ -9,12 +9,10 @@ export default class PopupWithConfirmation extends Popup {
   _handleSubmitForm(evt) {
     evt.preventDefault();
     this._formCallback();
-    //console.log('delete')
   }
 
-  my
-  submitHandler(NewCallback){
-    this._formCallback = NewCallback
+  submitHandler(newCallback){
+    this._formCallback = newCallback
   }
   close() {
     super.close();

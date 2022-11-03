@@ -7,21 +7,23 @@ export default class Api {
         this._baseUrl = baseUrl
       // тело конструктора
     }
+
+    _getResponseData(res) {
+      return res.ok ? res.json() : Promise.reject(res.status);
+  }
    getInfo(){
     return fetch(`${this._baseUrl}/users/me `, {
         headers: this._headers
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
+    }).then((res) => this._getResponseData(res))
    }
 
 
    getCards(){
     return fetch(`${this._baseUrl}/cards `, {
         headers: this._headers
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
-
+      }).then((res) => this._getResponseData(res))
+    }
+ 
 
    editProfile(data){
     return fetch(`${this._baseUrl}/users/me `, {
@@ -31,9 +33,9 @@ export default class Api {
             name: data.name,
             about: data.about,
           })
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
+        }).then((res) => this._getResponseData(res))
+      }
+   
 
    addCard(data){
     return fetch(`${this._baseUrl}/cards `, {
@@ -43,9 +45,9 @@ export default class Api {
             name: data.name,
             link: data.link
           })
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
+        }).then((res) => this._getResponseData(res))
+      }
+   
 
    editAvatar(data){
     return fetch(`${this._baseUrl}/users/me/avatar `, {
@@ -55,34 +57,34 @@ export default class Api {
           avatar: data.url,
       
         })
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
+      }).then((res) => this._getResponseData(res))
+    }
+ 
 
  
    deleteCard(id){
     return fetch(`${this._baseUrl}/cards/${id} `, {
       method: 'DELETE',
         headers: this._headers
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
+      }).then((res) => this._getResponseData(res))
+    }
+ 
 
    deleteLike(id){
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
         headers: this._headers
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
+      }).then((res) => this._getResponseData(res))
+    }
+ 
 
    setLike(id){
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
         headers: this._headers
-    }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-    .catch(console.log)
-   }
+      }).then((res) => this._getResponseData(res))
+    }
+ 
 
   
     // другие методы работы с API

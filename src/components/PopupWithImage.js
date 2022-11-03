@@ -6,9 +6,9 @@ export default class PopupWithImage extends Popup {
     this._imageDescription = this._popupElement.querySelector(".popup__description");
   }
   open(data) {
-    super.open();
     this._image.src = data.image;
     this._image.alt = data.text;
     this._imageDescription.textContent = `${data.text}`;
+    super.open();
   }
 }
