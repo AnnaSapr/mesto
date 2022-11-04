@@ -1,7 +1,6 @@
 import "./index.css";
 import {
   config,
-  initialCards,
   popupOpenEdit,
   formProfileElement,
   nameInput,
@@ -46,10 +45,7 @@ Promise.all([
     userInfo.setUserInfo({ name: res.name, about: res.about });
     userInfo.setUserAvatar({ avatar: res.avatar });
     userId = res._id; // у нас есть все нужные данные, отрисовываем страницу
-    cardList.forEach((data) => {
-      const card = createCard(data);
-      section.addItem(card);
-    });
+    section.renderItems(cardList.reverse())
   })
   .catch((err) => {
     //попадаем сюда если один из промисов завершаться ошибкой
@@ -222,7 +218,6 @@ const createCard = (item) => {
 
 const section = new Section(
   {
-    items: initialCards.reverse(),
     renderer: (data) => {
       section.addItem(createCard(data));
     },
@@ -230,5 +225,4 @@ const section = new Section(
   ".elements"
 );
 
-section.renderItems();
 
